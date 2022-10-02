@@ -331,6 +331,7 @@ library cli-lib
     Wasp.Cli.Command.Telemetry.Common
     Wasp.Cli.Command.Telemetry.Project
     Wasp.Cli.Command.Telemetry.User
+    Wasp.Cli.Command.Update
     Wasp.Cli.Command.Watch
     Wasp.Cli.Command.WaspLS
     Wasp.Cli.Common
