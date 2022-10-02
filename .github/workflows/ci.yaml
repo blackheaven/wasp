@@ -3,14 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - main
-      - release
-  pull_request: { }
-  create: { tags: [v*] }
-  schedule:
-    # Additionally run once per week (At 00:00 on Sunday) to avoid loosing cache
-    # (GH deletes it after 7 days of not using it).
-    - cron: '0 0 * * 0'
+      - '*'
 
 env:
   WASP_TELEMETRY_DISABLE: 1
@@ -41,8 +34,6 @@ jobs:
           - "3.6.2.0"
         os:
           - ubuntu-latest
-          - macos-latest
-          - windows-latest
 
     steps:
       - name: Configure git
@@ -108,7 +99,6 @@ jobs:
         run: cabal test
 
       - name: Create binary package (Unix)
-        if: startsWith(github.ref, 'refs/tags/v') && (matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest')
         run: |
           OS_NAME=`case "${{ runner.os }}" in Linux) echo "linux";; macOS) echo "macos";; *) exit 1;; esac`
           mkdir artifacts
@@ -116,7 +106,6 @@ jobs:
 
       - name: Create Github release
         uses: ncipollo/release-action@v1
-        if: startsWith(github.ref, 'refs/tags/v') && (matrix.os == 'ubuntu-latest' || matrix.os == 'macos-latest')
         with:
           draft: true
           allowUpdates: true
