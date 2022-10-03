@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - '*'
+  create: { tags: [v*] }
 
 env:
   WASP_TELEMETRY_DISABLE: 1
