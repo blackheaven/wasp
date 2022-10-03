@@ -11,8 +11,8 @@ import Wasp.Cli.Command.Message (cliSendMessageC)
 import qualified Wasp.Cli.Common as Common
 import qualified Wasp.Message as Msg
 
-clean :: Command ()
-clean = do
+update :: Command ()
+update = do
   cliSendMessageC $ Msg.Start "Updating wasp..."
   status <- liftIO $ system "curl -sSL https://get.wasp-lang.dev/installer.sh | sh"
   if status == ExitSuccess
